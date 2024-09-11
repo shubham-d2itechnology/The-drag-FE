@@ -49,7 +49,8 @@ useEffect(()=>{
         fetch(`${process.env.REACT_APP_BASE_URL}v1/apis/logout`,
             {
             method:'post',
-            credentials:'same-origin'
+            credentials:'include'
+        
 
         }
         ).then((res)=>res.json()).then((res)=>{
