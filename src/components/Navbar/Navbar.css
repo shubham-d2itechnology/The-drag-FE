@@ -12,14 +12,28 @@
          height:100%;
          background-color: #1c1826;
          display: flex;
-         justify-content:space-around;
+         justify-content: space-between;
+         margin:0 10vw;
          align-items: center;
+        
          
+     }
+     .navbar>a{
+        display:flex;
+        gap:10px;
+        text-decoration: none;
+        color:white;
+        align-items: center;
+        >p{
+            font-size:30px;
+            font-family: 'Jost';
+            font-weight:500;
+        }
      }
      .navbar .nav-logo{
            width:53px;
            height:44px;
-         
+        
           cursor:pointer;
      }
      .navbar .page-items ul {
@@ -67,9 +81,23 @@
          height:100%;
          background-color: #1c1826;
          display: flex;
-         justify-content:space-around;
+        
+         justify-content: space-between;
+         margin:0 8vw;
          align-items: center;
          
+     }
+     .navbar>a{
+        display:flex;
+        gap:10px;
+        text-decoration: none;
+        color:white;
+        align-items: center;
+        >p{
+            font-size:30px;
+            font-family: 'Jost';
+            font-weight:500;
+        }
      }
      .navbar .nav-logo{
            width:53px;
@@ -123,9 +151,22 @@
          height:100%;
          background-color: #1c1826;
          display: flex;
-         justify-content:space-around;
+         justify-content:space-between;
+         margin:0 5vw;
          align-items: center;
          
+     }
+     .navbar>a{
+        display:flex;
+        gap:10px;
+        text-decoration: none;
+        color:white;
+        align-items: center;
+        >p{
+            font-size:30px;
+            font-family: 'Jost';
+            font-weight:500;
+        }
      }
      .navbar .nav-logo{
            width:45px;

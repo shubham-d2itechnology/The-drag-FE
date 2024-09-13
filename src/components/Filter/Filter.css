@@ -95,6 +95,7 @@
     line-height: 21.68px;
     text-align: left;
     background-color: rgba(255, 238, 203, 1) ;
+    padding-left:2px;
         }
     }
     option:hover{
@@ -132,6 +133,8 @@
         flex-direction: column;
         gap:10px;
         width:70%;
+        
+
         & button{
             width:80px;
     height:35px;
@@ -149,6 +152,8 @@
     line-height: 100%;
     text-align: center;
     background: transparent;
+    position:absolute;
+    bottom:20px;
     
    
      &:hover{
@@ -197,6 +202,7 @@
     line-height: 100%;
     text-align: left;
     background-color: rgba(255, 238, 203, 1) ;
+    padding-left: 2px;
     }
 }
 

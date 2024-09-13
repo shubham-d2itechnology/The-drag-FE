@@ -23,7 +23,7 @@ fetch('https://countriesnow.space/api/v0.1/countries').then((res)=>res.json()).t
     location.set(ele.country,ele.cities);
   })
   console.log(location);
-  fetch(`${process.env.REACT_APP_BASE_URL}v1/apis/`).then((res)=>res.json()).then((res)=>{creatordata=res.data;console.log(creatordata);root.render(
+  fetch(`${process.env.REACT_APP_BASE_URL}v1/apis/`).then((res)=>res.json()).then((res)=>{creatordata=res.data;localStorage.setItem('State','logout');root.render(
    
     <React.StrictMode>
       <DragContext.Provider value={{brands,creators,communities,creatordata,location}} >
