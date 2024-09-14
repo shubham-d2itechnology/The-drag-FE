@@ -7,6 +7,7 @@ dotenv.config();
 const Contact = ({creatorEmail,name,close}) => {
  
     const handleContact=async (e)=>{
+        document.getElementById('email-btn').setAttribute('disabled','true');
           e.preventDefault();
           const data={
             subject:document.getElementById('subject').value,
@@ -42,7 +43,10 @@ const Contact = ({creatorEmail,name,close}) => {
                 <p className='email-main'>{`${name} <${creatorEmail}>`}</p>
                 
             </div>
-        <form className='contact-form' action={`${process.env.REACT_APP_BASE_URL}v1/apis/contact`} method="post" encType='multipart/form-data' onSubmit={(e)=>handleContact(e)}>
+        <form className='contact-form' action={`${process.env.REACT_APP_BASE_URL}v1/apis/contact`} method="post" encType='multipart/form-data' onSubmit={(e)=>{
+            handleContact(e);
+           
+            }}>
             
             <div className="subject">
                 <label htmlFor="subject">Subject:</label>
@@ -60,7 +64,7 @@ const Contact = ({creatorEmail,name,close}) => {
                 </div>
                 
             </div>
-            <button type="submit">SEND</button>
+            <button type="submit"  id='email-btn'>SEND</button>
         </form>
         <img src={close_icon} alt="" width={40} height={40} onClick={close} style={{cursor:'pointer'}}/>
       

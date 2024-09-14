@@ -10,15 +10,21 @@ dotenv.config();
 const Filter = ({helper,close}) => {
   const [visible,setvisible]=useState(false);
   const [locations,setlocations]=useState([]);
+  const [sort,setSort]= useState("");
+  const [type,setType] = useState("");
+  const [location,setLocation]=useState("");
+  const [platform,setPlatform]=useState("");
+  const [count,setCount]=useState("");
 
     const filter=()=>{
       const data={
-        type:document.getElementById('type').value,
-        count:document.getElementById('count').value,
-        sort:document.getElementById('sort').value,
-        location:document.getElementById('location').value,
-        platform:document.getElementById('platform').value
+        type:type,
+        count:count,
+        sort:sort,
+        location:location,
+        platform:platform
       }
+      console.log(sort);
       console.log(data);
      fetch(`${process.env.REACT_APP_BASE_URL}v1/apis/filter`,{
       method:'POST',
@@ -29,9 +35,8 @@ const Filter = ({helper,close}) => {
       body:JSON.stringify(data)
 
      }).then(res=>res.json()).then(res=>{
-      console.log(res.success);
-      console.log(res.data);
-      helper(res.data);
+console.log(res.result);
+      helper(res.result);
      })
      
     }
@@ -75,15 +80,20 @@ const Filter = ({helper,close}) => {
       <form className='filter-form' target='_blank'  onSubmit={(e)=>{filter();e.preventDefault();close()}}   >
         <div className='sort'>
           <label htmlFor="sort">Sort by</label>
-          <select name="sort" id="sort"   >
-            <option value="asc">Ascending{"(Followers)"}</option>
-            <option value="des">Descending{"(Followers)"}</option>
+          <select name="sort" id="sort" onChange={(e)=>{console.log(e.target.value);
+          setSort(e.target.value)}} value={sort}  >
+            <option value={""}>Select an Option</option>
+            <option value="asc">Ascending{`(Followers)`}</option>
+            <option value="des">Descending{`(Followers)`}</option>
 
           </select>
         </div>
         <div className='types'>
           <label htmlFor="type">Type</label>
-          <select name="type" id="type"  >
+          <select name="type" id="type" onChange={(e)=>{
+            console.log(e.target.value);
+            setType(e.target.value)}}  >
+              <option value={""}>Select an Option</option>
             {
               categories.map((ele) => (<option val={ele}>{ele}</option>))
             }
@@ -95,7 +105,7 @@ const Filter = ({helper,close}) => {
           <label htmlFor="location">
             Location
           </label>
-          <input type="text" name="location" id="location" placeholder='City,State or Country' onInput={(e)=>{
+          <input type="text" name="location" id="location" placeholder='City,State or Country' onChange={(e)=>setLocation(e.target.value)}  onInput={(e)=>{
                     debounce(handleLocation,1500,e);
                         console.log(locations)
                     }} />
@@ -107,8 +117,9 @@ const Filter = ({helper,close}) => {
         </div>
         <div className='platform'>
           <label htmlFor="platform">Main Platform</label>
-          <select name="platform" id="platform"  >
-            <option value="insta">Instagram</option>
+          <select name="platform" id="platform" onChange={(e)=>setPlatform(e.target.value)} >
+          <option value={""}>Select an Option</option>
+            <option value="instagram">Instagram</option>
             <option value="linkedin">Linked In</option>
             <option value="facebook">Facebook</option>
             <option value="twitter">Twitter</option>
@@ -119,8 +130,8 @@ const Filter = ({helper,close}) => {
         </div>
         <div className='follower-count'>
           <label htmlFor="follower-count">Followers Count</label>
-          <select name="count" id="count" >
-        
+          <select name="count" id="count" onChange={(e)=>setCount(e.target.value)} >
+          <option value={""}>Select an Option</option>
             <option value="0-1000" >0 - 1000</option>
             <option value="1000-5000" >1000 - 5000</option>
             <option value="5000-10000" >5000 - 10,000</option>

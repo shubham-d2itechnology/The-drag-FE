@@ -84,6 +84,7 @@ const Update = ({ close }) => {
         }).then((res) => res.json()).then((res) => {
 
             alert(res.message);
+            window.location.reload();
 
         })
     }

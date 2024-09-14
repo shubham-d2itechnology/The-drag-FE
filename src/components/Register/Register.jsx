@@ -30,6 +30,7 @@ setvisible(false);
    
 
     const handlesubmit = async (e) => {
+          document.getElementsByTagName('button').disabled=true;
         e.preventDefault();
         //  console.log(e.target.);
         console.log(img);
@@ -55,7 +56,7 @@ setvisible(false);
         for (let key in data) {
             formdata.append(key, data[key]);
         }
-
+    
          fetch(e.target.action,{
             method: 'post',
             body: formdata,

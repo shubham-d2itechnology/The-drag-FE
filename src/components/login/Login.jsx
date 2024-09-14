@@ -9,7 +9,35 @@ dotenv.config();
 const Login = ({setResponse,}) => {
 
     const [state,setstate]=useState('signup');
-    const [visible,setvisible]=useState(false)
+    const [visible,setvisible]=useState(false);
+    const [password, setPassword] = useState('');
+  const [isValid, setIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const specialChar = /[!@#$%^&*(),.?":{}|<>]/;
+    const upperCase = /[A-Z]/;
+    const lowerCase = /[a-z]/;
+    const number = /[0-9]/;
+
+    if (password.length < minLength) {
+      return 'Password must be at least 8 characters long';
+    }
+    if (!specialChar.test(password)) {
+      return 'Password must contain at least one special character';
+    }
+    if (!upperCase.test(password)) {
+      return 'Password must contain at least one uppercase letter';
+    }
+    if (!lowerCase.test(password)) {
+      return 'Password must contain at least one lowercase letter';
+    }
+    if (!number.test(password)) {
+      return 'Password must contain at least one number';
+    }
+    return '';
+  };
     useEffect(()=>{
         
         const password=document.getElementById('password');
@@ -61,15 +89,34 @@ else{
         
        
     }
+    const handleChange = (e) => {
+        const inputPassword = e.target.value;
+        setPassword(inputPassword);
+    
+        const error = validatePassword(inputPassword);
+        setErrorMessage(error);
+        setIsValid(!error);
+      };
+      const handlePassword=(e)=>{
+        if(e.target.value.length==0){
+        alert( `Password Should include:
+        * Password must be at least 8 characters long.
+        * Password must contain at least one special character.
+        * Password must contain at least one uppercase letter.
+        * Password must contain at least one lowercase letter.
+        * Password must contain at least one number.`    
+        )
+    }
+      }
 
     const handlesignup=async()=>{
-        
+        if(isValid){
         const formdata={
             name:document.getElementById('name').value,
             email:document.getElementById('email').value,
             password:document.getElementById('password').value,
         }
-        
+        if(isValid){
         await fetch(`${process.env.REACT_APP_BASE_URL}v1/apis/signup`,{
             method:'POST',
             headers:{
@@ -91,6 +138,17 @@ else{
                 alert(res.error);
             }
         })
+    }
+}
+else {
+    alert( `Password Should include:
+        * Password must be at least 8 characters long.
+        * Password must contain at least one special character.
+        * Password must contain at least one uppercase letter.
+        * Password must contain at least one lowercase letter.
+        * Password must contain at least one number.`    
+        )
+}
     }
 
   return (
@@ -118,8 +176,15 @@ else{
                 </div>
                 <div className='password'>
                     <label htmlFor="password">Password</label>
-                    <input type="password" name="password" id="password"     />
+                    <div>
+                    <input type="password" name="password" id="password" onClick={(e)=>handlePassword(e)} onChange={handleChange}    />
+                    
                     <img onClick={()=>{setvisible(!visible);}} src={eye} alt="" />
+                    </div>
+                    <div style={{ color: isValid ? 'green' : 'red' }}>
+        {isValid ? 'Password is valid' : errorMessage}
+      </div>
+                    
                 </div>
                <button type="button" onClick={handlesignup}>Sign Up</button>
             </form>
@@ -132,17 +197,13 @@ else{
             </div>
             <div className='password'>
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password"   />
+                <input type="password" name="password" id="password"  />
                 <img onClick={()=>{setvisible((!visible));} } src={eye} alt="show" />
             </div>
             <button type="submit" >Log In</button>
         </form>
                 }
-                
-                
-                   
-               
-            
+
             </div>
             <div className="main-part-right">
                 <img src={logo} alt="" />
