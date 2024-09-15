@@ -148,7 +148,7 @@
     
     #profileImage{
        display: flex;
-       gap:40px;
+       gap:10px;
        
         >input{
             height:max-content;
@@ -353,8 +353,10 @@ font-size: 2vh;
     
     #profileImage{
        display: flex;
+       gap:10px;
        >label{
         font-size:2vh;
+        line-height: 100%;
        }
        
         >input{
@@ -568,6 +570,7 @@ font-size: 2vh;
     
     #profileImage{
        display: flex;
+       gap:10px;
        >label{
         font-size:2vh;
         line-height: 100%;

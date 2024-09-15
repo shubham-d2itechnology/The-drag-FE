@@ -51,6 +51,7 @@ const Update = ({ close }) => {
     const handlesubmit = async (e) => {
 
         //  console.log(e.target.);
+        document.getElementById('creator-update-btn').setAttribute('disabled','true');
         console.log(img);
         const data = {
             userName:document.getElementById('username').value,
@@ -92,6 +93,7 @@ const Update = ({ close }) => {
         <div className='register-container'>
             <h3>Edit Creator Details</h3>
             <form action={`${process.env.REACT_APP_BASE_URL}v1/apis/edit`} encType='multipart/form-data' method='post' onSubmit={(e) => {
+              
                 handlesubmit(e);
                 e.preventDefault();
             }} >
@@ -130,7 +132,7 @@ const Update = ({ close }) => {
                     <div id='profileImage'>
                         <label htmlFor="profileImage">Profile Image</label>
                         <input type="file" name="profileImage" id="profileImage" onChange={e => { img = e.target.files[0] }} />
-
+                        <p >{"(File size less than 1MB)"}</p>
 
                     </div>
                     <div className="insta">
@@ -190,7 +192,7 @@ const Update = ({ close }) => {
 
 
 
-                <button type="submit">Submit</button>
+                <button id='creator-update-btn' type="submit">Submit</button>
             </form>
             <img src={close_icon} alt="" width={50} height={50} onClick={close} style={{ cursor: 'pointer' }} />
         </div>

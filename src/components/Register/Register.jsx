@@ -15,22 +15,22 @@ dotenv.config();
 var img;
 
 
-const Register =  ({ close }) => {
- 
-    const [visible,setvisible]=useState(false);
-    const [locations,setlocations]=useState([]);
-    
+const Register = ({ close }) => {
+
+    const [visible, setvisible] = useState(false);
+    const [locations, setlocations] = useState([]);
+
     const { linkedin, insta, twitter, youtube, facebook } = images;
-    const input=(data)=>{
-           
-document.getElementById('location').value=data;
-setvisible(false);
+    const input = (data) => {
+
+        document.getElementById('location').value = data;
+        setvisible(false);
 
     }
-   
+
 
     const handlesubmit = async (e) => {
-          document.getElementsByTagName('button').disabled=true;
+
         e.preventDefault();
         //  console.log(e.target.);
         console.log(img);
@@ -56,8 +56,8 @@ setvisible(false);
         for (let key in data) {
             formdata.append(key, data[key]);
         }
-    
-         fetch(e.target.action,{
+
+        fetch(e.target.action, {
             method: 'post',
             body: formdata,
             credentials: 'include',
@@ -75,35 +75,39 @@ setvisible(false);
     }
     function debounce(handleLocation, delay, e) {
         let timeoutId;
-      
-          if (timeoutId) {
-          
+
+        if (timeoutId) {
+
             clearTimeout(timeoutId);
-          }
-          timeoutId = setTimeout(() => {
-           handleLocation(e);
-          }, delay);
-        
-      }
-      
-    const handleLocation=(e)=>{
+        }
+        timeoutId = setTimeout(() => {
+            handleLocation(e);
+        }, delay);
+
+    }
+
+    const handleLocation = (e) => {
         console.log(e.target.value);
-            fetch(`https://nominatim.openstreetmap.org/search?q=${e.target.value}&format=json`)
-            .then((res)=>res.json())
-            .then(res=>{
-                
-              let arr= res.map((ele)=>{
-                return ele.display_name;
-               })
-               setlocations(arr);
-             
-               setvisible(true);
+        fetch(`https://nominatim.openstreetmap.org/search?q=${e.target.value}&format=json`)
+            .then((res) => res.json())
+            .then(res => {
+
+                let arr = res.map((ele) => {
+                    return ele.display_name;
+                })
+                setlocations(arr);
+
+                setvisible(true);
             })
     }
     return (
         <div className='register-container'>
             <h3>Enter Details</h3>
-            <form action={`${process.env.REACT_APP_BASE_URL}v1/apis/register`} encType='multipart/form-data' method='post' onSubmit={(e) => handlesubmit(e)} >
+            <form action={`${process.env.REACT_APP_BASE_URL}v1/apis/register`} encType='multipart/form-data' method='post' onSubmit={(e) => {
+                handlesubmit(e);
+                document.getElementById('register-btn').setAttribute('disabled', 'true');
+            }
+            }   >
                 <div className="username">
                     <label htmlFor="username">User Name</label>
                     <input type="text" name="userName" id="username" />
@@ -119,14 +123,14 @@ setvisible(false);
                 <div className="Location">
                     <label htmlFor="location">Location</label>
 
-                    <input type="text" name="location" id="location" placeholder='City,State or Country' onInput={(e)=>{
-                    debounce(handleLocation,1500,e);
+                    <input type="text" name="location" id="location" placeholder='City,State or Country' onInput={(e) => {
+                        debounce(handleLocation, 1500, e);
                         console.log(locations)
                     }} />
 
-                   {
-                  (visible&&locations.length>0)?<Dropdown locations={locations} input={input}/>:''
-}
+                    {
+                        (visible && locations.length > 0) ? <Dropdown locations={locations} input={input} /> : ''
+                    }
                 </div>
                 <div className="contacts">
 
@@ -139,7 +143,7 @@ setvisible(false);
                     <div id='profileImage'>
                         <label htmlFor="profileImage">Profile Image</label>
                         <input type="file" name="profileImage" id="profileImage" onChange={e => { img = e.target.files[0] }} />
-
+                         <p >{"(File size less than 1MB)"}</p>
 
                     </div>
                     <div className="insta">
@@ -200,7 +204,7 @@ setvisible(false);
 
 
 
-                <button >Submit</button>
+                <button id="register-btn">Submit</button>
             </form>
             <img src={close_icon} alt="" width={50} height={50} onClick={close} style={{ cursor: 'pointer' }} />
         </div>

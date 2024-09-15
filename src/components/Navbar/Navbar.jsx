@@ -56,6 +56,7 @@ const Navbar = () => {
         ).then((res) => res.json()).then((res) => {
             console.log(res.message);
             localStorage.setItem('State', 'logout');
+            localStorage.removeItem('creator');
             alert(res.message);
             setState(localStorage.getItem('State'));
             window.location.reload();

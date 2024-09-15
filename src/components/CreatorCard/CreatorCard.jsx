@@ -46,7 +46,7 @@ const CreatorCard = ({props}) => {
         <img src={image} alt="" />
         </div>
         <div className="creator-card-right">
-         <div className="name">
+         <div className="creator-name">
             <h3>{name}</h3>
             <p>Total Followers {(totalM)?`${totalM}M`:(totalk)?`${totalk}k`:totalsum}</p>
          </div>

@@ -14,7 +14,27 @@ const Login = ({ setResponse }) => {
     const [isValid, setIsValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
     const [clicked,setclicked]=useState(false);
+    const [email, setEmail] = useState('');
+    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [errorMessageEmail, setErrorMessageEmail] = useState('');
 
+    const validateEmail = (email) => {
+        // Basic email regex pattern
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        return emailPattern.test(email);
+      };
+      const handleEmail = (e) => {
+        const inputEmail = e.target.value;
+        setEmail(inputEmail);
+    
+        if (validateEmail(inputEmail)) {
+          setIsValidEmail(true);
+          setErrorMessageEmail('');
+        } else {
+          setIsValidEmail(false);
+          setErrorMessageEmail('Please enter a valid email address');
+        }
+      };
 
     const validatePassword = (password) => {
         const minLength = 8;
@@ -113,7 +133,7 @@ const Login = ({ setResponse }) => {
     }
 
     const handlesignup = async () => {
-        if (isValid) {
+        if (isValid&&isValidEmail) {
             const formdata = {
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value,
@@ -143,18 +163,16 @@ const Login = ({ setResponse }) => {
             })
 
         }
-        else {
+        else if(isValidEmail) {
            
-            alert(`Password Should include:
-        * Password must be at least 8 characters long.
-        * Password must contain at least one special character.
-        * Password must contain at least one uppercase letter.
-        * Password must contain at least one lowercase letter.
-        * Password must contain at least one number.`
-            )
-            
-        
+            alert(`Password is Invalid`);
 
+        }
+        else if(isValid ){
+            alert('Email is Invalid');
+        }
+        else{
+            alert(`Password and Email are Invalid`);
         }
     }
 
@@ -179,7 +197,10 @@ const Login = ({ setResponse }) => {
                             </div>
                             <div>
                                 <label htmlFor="email">E-mail</label>
-                                <input type="email" name="email" id="email" />
+                                <input type="email" name="email" id="email" onInput={(e)=>{handleEmail(e)}} />
+                                <div style={{ color: isValidEmail ? 'green' : 'red' }}>
+                                   {isValidEmail ? 'Email is valid' : errorMessageEmail}
+                                 </div>
                             </div>
                             <div className='password'>
                                 <label htmlFor="password">Password</label>
