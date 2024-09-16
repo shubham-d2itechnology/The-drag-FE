@@ -4,5 +4,9 @@
     flex-direction: column;
     
 }
+.popup-overlay{
+    position:sticky;
+    top:5px;
+}
 
 

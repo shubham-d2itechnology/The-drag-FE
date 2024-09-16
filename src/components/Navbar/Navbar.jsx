@@ -71,7 +71,7 @@ const Navbar = () => {
                 </Link>
                 
                 <div className="nav-icons-list">
-                    {(State === 'login') ? (creator === 'true') ? <Popup trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Update Creator Id</button>} closeOnDocumentClick={false} modal>
+                    {(State === 'login') ? (creator === 'true') ? <Popup  trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Update Creator Id</button>} closeOnDocumentClick={false} modal>
                         {
                             close => (
                                 <Update close={close} />
@@ -88,7 +88,7 @@ const Navbar = () => {
                     }
                     {
                         (State !== 'login') ?
-                            <Popup trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Sign Up/ Login</button>} modal>
+                            <Popup className="login-popup" trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Sign Up/ Login</button>} modal>
                                 {
                                     close => (
                                         <Login setResponse={fetchdata} />
