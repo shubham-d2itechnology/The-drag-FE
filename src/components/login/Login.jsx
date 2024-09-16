@@ -132,7 +132,8 @@ const Login = ({ setResponse }) => {
         }
     }
 
-    const handlesignup = async () => {
+    const handlesignup = async (e) => {
+        e.preventDefault();
         if (isValid&&isValidEmail) {
             const formdata = {
                 name: document.getElementById('name').value,
@@ -190,7 +191,7 @@ const Login = ({ setResponse }) => {
                         {state == 'signup' ? <p className='login'>Already have an account?<span style={{ cursor: 'pointer' }} onClick={() => setstate('login')}><strong>Log In</strong></span></p> : <p className='login'>Don't have an account?<span style={{ cursor: 'pointer' }} onClick={() => setstate('signup')}><strong>Sign Up</strong></span></p>}
                     </div>
                     {state == 'signup' ?
-                        <form >
+                        <form  onSubmit={(e)=>handlesignup(e)}>
                             <div>
                                 <label htmlFor="name">Name</label>
                                 <input type="text" name="name" id="name" />
@@ -198,7 +199,7 @@ const Login = ({ setResponse }) => {
                             <div>
                                 <label htmlFor="email">E-mail</label>
                                 <input type="email" name="email" id="email" onInput={(e)=>{handleEmail(e)}} />
-                                <div style={{ color: isValidEmail ? 'green' : 'red' }}>
+                                <div style={{fontSize:'15px', color: isValidEmail ? 'green' : 'red' }}>
                                    {isValidEmail ? 'Email is valid' : errorMessageEmail}
                                  </div>
                             </div>
@@ -209,12 +210,12 @@ const Login = ({ setResponse }) => {
 
                                     <img onClick={() => { setvisible(!visible); }} src={eye} alt="" />
                                 </div>
-                                <div style={{ color: isValid ? 'green' : 'red' }}>
+                                <div style={{fontSize:'15px', color: isValid ? 'green' : 'red' }}>
                                     {isValid ? 'Password is valid' : errorMessage}
                                 </div>
 
                             </div>
-                            <button type="button" onClick={handlesignup}>Sign Up</button>
+                            <button type="submit" >Sign Up</button>
                         </form>
                         :
                         <form onSubmit={(e) => { handlelogin(); e.preventDefault(); }} >

@@ -13,6 +13,7 @@ const Update = ({ close }) => {
     const { linkedin, insta, twitter, youtube, facebook } = images;
     const [visible,setvisible]=useState(false);
     const [locations,setlocations]=useState([]);
+    const [isValid,setisValid]=useState(true);
 
     const input=(data)=>{
            
@@ -47,12 +48,37 @@ const Update = ({ close }) => {
           }, delay);
         
       }
+      const handlePhone=(e)=>{
+        const tel=e.target.value;
+        
+        
+            if(tel.length===10){
+                const regex = /^[1-9][0-9]*$/;
+                if(!(regex.test(tel))){
+                   setisValid(false);
+                } 
+                
+             }
+             else {
+                if(tel.length>0){
+                    setisValid(false);
+                }
+             }
+        
+
+        
+      }
 
     const handlesubmit = async (e) => {
 
         //  console.log(e.target.);
-        document.getElementById('creator-update-btn').setAttribute('disabled','true');
+        
+       
+       e.preventDefault();
+
         console.log(img);
+        if(img.size<=1024*1024 && isValid){
+            document.getElementById('creator-update-btn').setAttribute('disabled','true');
         const data = {
             userName:document.getElementById('username').value,
             type: document.getElementById('type').value,
@@ -60,18 +86,19 @@ const Update = ({ close }) => {
             phone: document.getElementById('phone').value,
             profileImage: img,
             insta: document.getElementById('instaurl').value,
-            instacount: document.getElementById('instacount').value,
+            instacount: (document.getElementById('instacount').value),
             twitter: document.getElementById('twitterurl').value,
-            twittercount: document.getElementById('twittercount').value,
+            twittercount: (document.getElementById('twittercount').value),
             linkedin: document.getElementById('linkedinurl').value,
-            linkedincount: document.getElementById('linkedincount').value,
+            linkedincount: (document.getElementById('linkedincount').value),
             facebook: document.getElementById('facebookurl').value,
-            facebookcount: document.getElementById('facebookcount').value,
+            facebookcount: (document.getElementById('facebookcount').value),
             youtube: document.getElementById('youtubeurl').value,
-            youtubecount: document.getElementById('youtubecount').value,
+            youtubecount: (document.getElementById('youtubecount').value),
 
         }
-        console.log(data)
+        console.log(data);
+        console.log( data.instacount);
         const formdata = new FormData();
         for (let key in data) {
             formdata.append(key, data[key]);
@@ -89,13 +116,23 @@ const Update = ({ close }) => {
 
         })
     }
+    else if(img.size>1024*1024){
+        alert(`Image Size Exceeding 1MB`);
+    }
+    else if(!isValid){
+        alert(`Mobile Number is Invalid`);
+    }
+    else{
+        alert(`Mobile Number is Invalid & Image Size Exceeding 1MB`);
+    }
+    }
     return (
         <div className='register-container'>
             <h3>Edit Creator Details</h3>
             <form action={`${process.env.REACT_APP_BASE_URL}v1/apis/edit`} encType='multipart/form-data' method='post' onSubmit={(e) => {
               
                 handlesubmit(e);
-                e.preventDefault();
+                
             }} >
                 <div className="username">
                     <label htmlFor="username">User Name</label>
@@ -127,11 +164,11 @@ const Update = ({ close }) => {
                         <label htmlFor="phone">
                             Mobile No.
                         </label>
-                        <input type="tel" name="phone" id="phone" placeholder='XXXXX-XXXXX' />
+                        <input type="tel" onInput={(e)=>handlePhone(e)}   maxLength={10} minLength={0} name="phone" id="phone" placeholder='XXXXX-XXXXX' />
                     </div>
                     <div id='profileImage'>
                         <label htmlFor="profileImage">Profile Image</label>
-                        <input type="file" name="profileImage" id="profileImage" onChange={e => { img = e.target.files[0] }} />
+                        <input type="file" accept='image/*' name="profileImage" id="profileImage" onChange={e => { img = e.target.files[0] }} />
                         <p >{"(File size less than 1MB)"}</p>
 
                     </div>

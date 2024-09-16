@@ -19,7 +19,7 @@ const Register = ({ close }) => {
 
     const [visible, setvisible] = useState(false);
     const [locations, setlocations] = useState([]);
-
+    const [isValid,setisValid]=useState(true);
     const { linkedin, insta, twitter, youtube, facebook } = images;
     const input = (data) => {
 
@@ -28,12 +28,35 @@ const Register = ({ close }) => {
 
     }
 
+    const handlePhone=(e)=>{
+        const tel=e.target.value;
+        
+        
+            if(tel.length===10){
+                const regex = /^[1-9][0-9]*$/;
+                if(!(regex.test(tel))){
+                   setisValid(false);
+                } 
+                
+             }
+             else {
+                if(tel.length>0){
+                    setisValid(false);
+                }
+             }
+        
+
+        
+      }
 
     const handlesubmit = async (e) => {
 
         e.preventDefault();
         //  console.log(e.target.);
+        
+
         console.log(img);
+        if(img.size<=1024*1024 && isValid){
         const data = {
             type: document.getElementById('type').value,
             userName: document.getElementById('username').value,
@@ -41,17 +64,18 @@ const Register = ({ close }) => {
             phone: document.getElementById('phone').value,
             profileImage: img,
             insta: document.getElementById('instaurl').value,
-            instacount: document.getElementById('instacount').value,
+            instacount: (document.getElementById('instacount').value),
             twitter: document.getElementById('twitterurl').value,
-            twittercount: document.getElementById('twittercount').value,
+            twittercount: (document.getElementById('twittercount').value),
             linkedin: document.getElementById('linkedinurl').value,
-            linkedincount: document.getElementById('linkedincount').value,
+            linkedincount: (document.getElementById('linkedincount').value),
             facebook: document.getElementById('facebookurl').value,
-            facebookcount: document.getElementById('facebookcount').value,
+            facebookcount: (document.getElementById('facebookcount').value),
             youtube: document.getElementById('youtubeurl').value,
-            youtubecount: document.getElementById('youtubecount').value,
+            youtubecount: (document.getElementById('youtubecount').value),
 
         }
+        console.log(typeof data.instacount);
         const formdata = new FormData();
         for (let key in data) {
             formdata.append(key, data[key]);
@@ -69,10 +93,23 @@ const Register = ({ close }) => {
             }
             else {
                 localStorage.setItem('creator', true);
+                alert(res.message);
                 window.location.reload();
             }
         })
     }
+    else if(img.size>1024*1024) {
+        alert(`Image Size Exceeding 1MB`);
+    }
+    else if(!isValid){
+        alert(`Mobile Number is Invalid`);
+    }
+    else {
+        alert(`Mobile Number is Invalid.
+            Image Size Exceeding 1MB`);
+    }
+}
+    
     function debounce(handleLocation, delay, e) {
         let timeoutId;
 
@@ -138,11 +175,11 @@ const Register = ({ close }) => {
                         <label htmlFor="phone">
                             Mobile No.
                         </label>
-                        <input type="tel" name="phone" id="phone" placeholder='XXXXX-XXXXX' />
+                        <input type="tel" onInput={(e)=>handlePhone(e)}   maxLength={10} minLength={0} name="phone" id="phone" placeholder='XXXXX-XXXXX' />
                     </div>
                     <div id='profileImage'>
                         <label htmlFor="profileImage">Profile Image</label>
-                        <input type="file" name="profileImage" id="profileImage" onChange={e => { img = e.target.files[0] }} />
+                        <input type="file" accept='image/*' name="profileImage" id="profileImage" onChange={e => { img = e.target.files[0] }} />
                          <p >{"(File size less than 1MB)"}</p>
 
                     </div>
@@ -210,5 +247,6 @@ const Register = ({ close }) => {
         </div>
     )
 }
+
 
 export default Register
