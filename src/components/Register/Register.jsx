@@ -20,6 +20,7 @@ const Register = ({ close }) => {
     const [visible, setvisible] = useState(false);
     const [locations, setlocations] = useState([]);
     const [isValid,setisValid]=useState(true);
+  
     const { linkedin, insta, twitter, youtube, facebook } = images;
     const input = (data) => {
 
@@ -37,12 +38,14 @@ const Register = ({ close }) => {
                 if(!(regex.test(tel))){
                    setisValid(false);
                 } 
+                else setisValid(true);
                 
              }
              else {
                 if(tel.length>0){
                     setisValid(false);
                 }
+                else setisValid(true);
              }
         
 
@@ -53,10 +56,12 @@ const Register = ({ close }) => {
 
         e.preventDefault();
         //  console.log(e.target.);
-        
+
 
         console.log(img);
-        if(img.size<=1024*1024 && isValid){
+        if(img!=null){
+        if(((img.size<=1024*1024) && isValid)){
+            document.getElementById('register-btn').setAttribute('disabled','true');
         const data = {
             type: document.getElementById('type').value,
             userName: document.getElementById('username').value,
@@ -89,25 +94,79 @@ const Register = ({ close }) => {
         }).then((res) => res.json()).then((res) => {
             if (!res.success) {
                 alert(res.error);
-
+                 
+                 document.getElementById('register-btn').removeAttribute('disabled');
             }
             else {
+
                 localStorage.setItem('creator', true);
                 alert(res.message);
                 window.location.reload();
             }
         })
     }
-    else if(img.size>1024*1024) {
-        alert(`Image Size Exceeding 1MB`);
-    }
-    else if(!isValid){
-        alert(`Mobile Number is Invalid`);
-    }
-    else {
+    else if(img.size>1024*1024 && !isValid) {
         alert(`Mobile Number is Invalid.
             Image Size Exceeding 1MB`);
     }
+    else if(img.size>1024*1024){
+        alert(`Image Size Exceeding 1MB`);
+
+    }
+    else{
+        alert(`Mobile Number is Invalid`);
+    }
+}
+else{
+    if(( isValid)){
+        document.getElementById('register-btn').setAttribute('disabled','true');
+        const data = {
+            type: document.getElementById('type').value,
+            userName: document.getElementById('username').value,
+            location: document.getElementById('location').value,
+            phone: document.getElementById('phone').value,
+            profileImage: img,
+            insta: document.getElementById('instaurl').value,
+            instacount: (document.getElementById('instacount').value),
+            twitter: document.getElementById('twitterurl').value,
+            twittercount: (document.getElementById('twittercount').value),
+            linkedin: document.getElementById('linkedinurl').value,
+            linkedincount: (document.getElementById('linkedincount').value),
+            facebook: document.getElementById('facebookurl').value,
+            facebookcount: (document.getElementById('facebookcount').value),
+            youtube: document.getElementById('youtubeurl').value,
+            youtubecount: (document.getElementById('youtubecount').value),
+
+        }
+        console.log(typeof data.instacount);
+        const formdata = new FormData();
+        for (let key in data) {
+            formdata.append(key, data[key]);
+        }
+
+        fetch(e.target.action, {
+            method: 'post',
+            body: formdata,
+            credentials: 'include',
+
+        }).then((res) => res.json()).then((res) => {
+            if (!res.success) {
+                alert(res.error);
+                 
+                 document.getElementById('register-btn').removeAttribute('disabled');
+            }
+            else {
+
+                localStorage.setItem('creator', true);
+                alert(res.message);
+                window.location.reload();
+            }
+        })
+    }
+    else{
+        alert(`Mobile Number is Invalid`);
+    }
+}
 }
     
     function debounce(handleLocation, delay, e) {
@@ -142,7 +201,7 @@ const Register = ({ close }) => {
             <h3>Enter Details</h3>
             <form action={`${process.env.REACT_APP_BASE_URL}v1/apis/register`} encType='multipart/form-data' method='post' onSubmit={(e) => {
                 handlesubmit(e);
-                document.getElementById('register-btn').setAttribute('disabled', 'true');
+                
             }
             }   >
                 <div className="username">
@@ -241,7 +300,7 @@ const Register = ({ close }) => {
 
 
 
-                <button id="register-btn">Submit</button>
+                <button type="submit"  id="register-btn">Submit</button>
             </form>
             <img src={close_icon} alt="" width={50} height={50} onClick={close} style={{ cursor: 'pointer' }} />
         </div>

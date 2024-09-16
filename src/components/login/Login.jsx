@@ -199,7 +199,7 @@ const Login = ({ setResponse }) => {
                             <div>
                                 <label htmlFor="email">E-mail</label>
                                 <input type="email" name="email" id="email" onInput={(e)=>{handleEmail(e)}} />
-                                <div style={{fontSize:'15px', color: isValidEmail ? 'green' : 'red' }}>
+                                <div style={{fontSize:'12px', color: isValidEmail ? 'green' : 'red' }}>
                                    {isValidEmail ? 'Email is valid' : errorMessageEmail}
                                  </div>
                             </div>
@@ -210,7 +210,7 @@ const Login = ({ setResponse }) => {
 
                                     <img onClick={() => { setvisible(!visible); }} src={eye} alt="" />
                                 </div>
-                                <div style={{fontSize:'15px', color: isValid ? 'green' : 'red' }}>
+                                <div style={{fontSize:'12px', color: isValid ? 'green' : 'red' }}>
                                     {isValid ? 'Password is valid' : errorMessage}
                                 </div>
 

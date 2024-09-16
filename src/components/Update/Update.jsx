@@ -57,31 +57,33 @@ const Update = ({ close }) => {
                 if(!(regex.test(tel))){
                    setisValid(false);
                 } 
+                else setisValid(true);
                 
              }
              else {
                 if(tel.length>0){
                     setisValid(false);
                 }
+                else setisValid(true);
              }
         
 
         
       }
 
-    const handlesubmit = async (e) => {
+      const handlesubmit = async (e) => {
 
+        e.preventDefault();
         //  console.log(e.target.);
-        
-       
-       e.preventDefault();
+
 
         console.log(img);
-        if(img.size<=1024*1024 && isValid){
-            document.getElementById('creator-update-btn').setAttribute('disabled','true');
+        if(img!=null){
+        if(((img.size<=1024*1024) && isValid)){
+            document.getElementById('update-btn').setAttribute('disabled','true');
         const data = {
-            userName:document.getElementById('username').value,
             type: document.getElementById('type').value,
+            userName: document.getElementById('username').value,
             location: document.getElementById('location').value,
             phone: document.getElementById('phone').value,
             profileImage: img,
@@ -97,35 +99,94 @@ const Update = ({ close }) => {
             youtubecount: (document.getElementById('youtubecount').value),
 
         }
-        console.log(data);
-        console.log( data.instacount);
+        console.log(typeof data.instacount);
         const formdata = new FormData();
         for (let key in data) {
             formdata.append(key, data[key]);
         }
 
-        await fetch(e.target.action, {
+        fetch(e.target.action, {
             method: 'post',
             body: formdata,
             credentials: 'include',
 
         }).then((res) => res.json()).then((res) => {
+            if (!res.success) {
+                alert(res.error);
+                 
+                 document.getElementById('update-btn').removeAttribute('disabled');
+            }
+            else {
 
-            alert(res.message);
-            window.location.reload();
-
+                localStorage.setItem('creator', true);
+                alert(res.message);
+                window.location.reload();
+            }
         })
+    }
+    else if(img.size>1024*1024 && !isValid) {
+        alert(`Mobile Number is Invalid.
+            Image Size Exceeding 1MB`);
     }
     else if(img.size>1024*1024){
         alert(`Image Size Exceeding 1MB`);
-    }
-    else if(!isValid){
-        alert(`Mobile Number is Invalid`);
+
     }
     else{
-        alert(`Mobile Number is Invalid & Image Size Exceeding 1MB`);
+        alert(`Mobile Number is Invalid`);
     }
+}
+else{
+    if(( isValid)){
+        document.getElementById('update-btn').setAttribute('disabled','true');
+        const data = {
+            type: document.getElementById('type').value,
+            userName: document.getElementById('username').value,
+            location: document.getElementById('location').value,
+            phone: document.getElementById('phone').value,
+            profileImage: img,
+            insta: document.getElementById('instaurl').value,
+            instacount: (document.getElementById('instacount').value),
+            twitter: document.getElementById('twitterurl').value,
+            twittercount: (document.getElementById('twittercount').value),
+            linkedin: document.getElementById('linkedinurl').value,
+            linkedincount: (document.getElementById('linkedincount').value),
+            facebook: document.getElementById('facebookurl').value,
+            facebookcount: (document.getElementById('facebookcount').value),
+            youtube: document.getElementById('youtubeurl').value,
+            youtubecount: (document.getElementById('youtubecount').value),
+
+        }
+        console.log(typeof data.instacount);
+        const formdata = new FormData();
+        for (let key in data) {
+            formdata.append(key, data[key]);
+        }
+
+        fetch(e.target.action, {
+            method: 'post',
+            body: formdata,
+            credentials: 'include',
+
+        }).then((res) => res.json()).then((res) => {
+            if (!res.success) {
+                alert(res.error);
+                 
+                 document.getElementById('update-btn').removeAttribute('disabled');
+            }
+            else {
+
+                localStorage.setItem('creator', true);
+                alert(res.message);
+                window.location.reload();
+            }
+        })
     }
+    else{
+        alert(`Mobile Number is Invalid`);
+    }
+}
+}
     return (
         <div className='register-container'>
             <h3>Edit Creator Details</h3>
@@ -141,7 +202,8 @@ const Update = ({ close }) => {
                 <div className="Type">
                     <label htmlFor="type">Type</label>
                     <select name="type" id="type" >
-                        <option value={''} children={'No change'} />
+                        
+                        <option value=" ">No Change</option>
                         {
                             categories.map((ele) => <option value={ele}>{ele}</option>)
                         }
@@ -229,7 +291,7 @@ const Update = ({ close }) => {
 
 
 
-                <button id='creator-update-btn' type="submit">Submit</button>
+                <button id='update-btn' type="submit">Submit</button>
             </form>
             <img src={close_icon} alt="" width={50} height={50} onClick={close} style={{ cursor: 'pointer' }} />
         </div>
