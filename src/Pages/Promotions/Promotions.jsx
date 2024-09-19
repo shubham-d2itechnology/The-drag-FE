@@ -41,7 +41,7 @@ const Promotions = () => {
     })
 
   }
-  let size = 0;
+  let size = 0,cnt=0;
 
 
   return (
@@ -82,7 +82,7 @@ const Promotions = () => {
 
               data.map((item, idx) => {
                 if (size == 0) size = data.length;
-                if (idx + 1 <= Count) {
+                if (cnt<Count && item.approved) {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -98,13 +98,15 @@ const Promotions = () => {
                     youtubeurl: item.socialMedia.youtube.url,
                     youtubecount: item.socialMedia.youtube.count,
                   }
+                  cnt++;
                   return <CreatorCard props={obj} />
                 }
                 else return <></>
               }) :(isFilter)?(data.length>0)?
+                
               data.map((item, idx) => {
                 if (size == 0) size = data.length;
-                if (idx + 1 <= Count) {
+                if (cnt<Count && item.approved) {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -120,6 +122,7 @@ const Promotions = () => {
                     youtubeurl: item.socialMedia.youtube.url,
                     youtubecount: item.socialMedia.youtube.count,
                   }
+                  cnt++;
                   return <CreatorCard props={obj} />
                 }
                 else return <></>
@@ -129,7 +132,7 @@ const Promotions = () => {
               </div>) :
               creatordata.map((item, idx) => {
                 if (size == 0) size = creatordata.length;
-                if (idx + 1 <= Count) {
+                if (cnt< Count && item.approved) {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -145,6 +148,7 @@ const Promotions = () => {
                     youtubeurl: item.socialMedia.youtube.url,
                     youtubecount: item.socialMedia.youtube.count,
                   }
+                  cnt++;
                   return <CreatorCard props={obj} />
                 }
                 else return <> </>
@@ -156,7 +160,7 @@ const Promotions = () => {
                 <p style={{ color: 'white', fontSize: '40px', fontFamily: 'Roboto', fontWeight: '500',textAlign:'center' }}>No Creator Matches Your applied Filter</p>
               </div>):creatordata.map((item, idx) => {
                 if (size == 0) size = data.length;
-                if (idx + 1 <= Count) {
+                if (cnt< Count && item.approved) {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -172,6 +176,7 @@ const Promotions = () => {
                     youtubeurl: item.socialMedia.youtube.url,
                     youtubecount: item.socialMedia.youtube.count,
                   }
+                  cnt++;
                   return <CreatorCard props={obj} />
                 }
                 else return <></>

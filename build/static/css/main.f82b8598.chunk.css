@@ -1384,6 +1384,7 @@ align-items: center;
     line-height: 100%;
     color: rgba(28, 24, 38, 1);
     text-align: start;
+    overflow-wrap: break-word;
         }
         &>p{
           
