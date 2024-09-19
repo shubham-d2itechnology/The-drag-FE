@@ -39,6 +39,7 @@ const Navbar = () => {
         Fetch();
     }, [])
     const fetchdata = (data, st) => {
+        console.log(data);
         setcreator(data);
         setState(st);
 
@@ -78,14 +79,15 @@ const Navbar = () => {
 
                             )
                         }
-                    </Popup> : <Popup trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Register as Creator</button>} closeOnDocumentClick={false} modal nested>
+                    </Popup> :(creator==='false')? <Popup trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Register as Creator</button>} closeOnDocumentClick={false} modal nested>
                         {
                             close => (
                                 <Register close={close} location={location} />
                             )
                         }
-                    </Popup> : <></>
-                    }
+                    </Popup> : 
+                    <button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Waiting for Approval</button>
+                    :<></>}
                     {
                         (State !== 'login') ?
                             <Popup className="login-popup" trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Sign Up/ Login</button>} modal>

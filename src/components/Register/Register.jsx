@@ -99,7 +99,7 @@ const Register = ({ close }) => {
             }
             else {
 
-                localStorage.setItem('creator', true);
+                localStorage.setItem('creator', res.creator.approved);
                 alert(res.message);
                 window.location.reload();
             }
@@ -157,7 +157,15 @@ else{
             }
             else {
 
-                localStorage.setItem('creator', true);
+                if(res.creator.approved=='true'){
+                      localStorage.setItem('creator','true');
+                }
+                else if(res.creator.approved=='false'){
+                    localStorage.setItem('creator','false');
+                }
+                else{
+                    localStorage.setItem('creator','pending');
+                }
                 alert(res.message);
                 window.location.reload();
             }

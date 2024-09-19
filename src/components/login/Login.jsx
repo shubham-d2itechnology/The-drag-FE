@@ -99,7 +99,7 @@ const Login = ({ setResponse }) => {
                 localStorage.setItem('State', 'login');
                 console.log(res.iscreator);
                 setResponse(res.iscreator, localStorage.getItem('State'));
-                localStorage.setItem('creator', Boolean(res.iscreator));
+                localStorage.setItem('creator', res.iscreator);
                 window.location.reload();
             }
             else {
@@ -154,7 +154,7 @@ const Login = ({ setResponse }) => {
                 if (res.success) {
                     localStorage.setItem('State', 'login');
                     setResponse(res.iscreator, localStorage.getItem('State'));
-                    localStorage.setItem('creator', Boolean(res.iscreator));
+                    localStorage.setItem('creator', res.iscreator);
                     alert("Sign Up Sucessfull!")
                     window.location.reload();
                 }

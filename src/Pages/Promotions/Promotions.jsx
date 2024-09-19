@@ -82,7 +82,7 @@ const Promotions = () => {
 
               data.map((item, idx) => {
                 if (size == 0) size = data.length;
-                if (cnt<Count && item.approved) {
+                if (cnt<Count && item.approved==="true") {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -106,7 +106,7 @@ const Promotions = () => {
                 
               data.map((item, idx) => {
                 if (size == 0) size = data.length;
-                if (cnt<Count && item.approved) {
+                if (cnt<Count && item.approved==="true") {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -132,7 +132,7 @@ const Promotions = () => {
               </div>) :
               creatordata.map((item, idx) => {
                 if (size == 0) size = creatordata.length;
-                if (cnt< Count && item.approved) {
+                if (cnt< Count && item.approved==="true") {
                   const obj = {
                     name: item.userName,
                     email: item.email,
@@ -160,7 +160,7 @@ const Promotions = () => {
                 <p style={{ color: 'white', fontSize: '40px', fontFamily: 'Roboto', fontWeight: '500',textAlign:'center' }}>No Creator Matches Your applied Filter</p>
               </div>):creatordata.map((item, idx) => {
                 if (size == 0) size = data.length;
-                if (cnt< Count && item.approved) {
+                if (cnt< Count && item.approved==="true") {
                   const obj = {
                     name: item.userName,
                     email: item.email,
