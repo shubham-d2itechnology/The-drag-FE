@@ -116,7 +116,7 @@ console.log(res.result);
 
         </div>
         <div className='platform'>
-          <label htmlFor="platform">Main Platform</label>
+          <label htmlFor="platform"> Platform</label>
           <select name="platform" id="platform" onChange={(e)=>setPlatform(e.target.value)} >
           <option value={""}>Select an Option</option>
             <option value="instagram">Instagram</option>
