@@ -118,7 +118,7 @@ const Update = ({ close }) => {
             }
             else {
 
-                localStorage.setItem('creator', true);
+                sessionStorage.setItem('creator', true);
                 alert(res.message);
                 window.location.reload();
             }
@@ -176,7 +176,7 @@ else{
             }
             else {
 
-                localStorage.setItem('creator', true);
+                sessionStorage.setItem('creator', true);
                 alert(res.message);
                 window.location.reload();
             }

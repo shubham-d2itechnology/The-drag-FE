@@ -99,7 +99,7 @@ const Register = ({ close }) => {
             }
             else {
 
-                localStorage.setItem('creator', res.creator.approved);
+                sessionStorage.setItem('creator', res.creator.approved);
                 alert(res.message);
                 window.location.reload();
             }
@@ -158,13 +158,13 @@ else{
             else {
 
                 if(res.creator.approved=='true'){
-                      localStorage.setItem('creator','true');
+                      sessionStorage.setItem('creator','true');
                 }
                 else if(res.creator.approved=='false'){
-                    localStorage.setItem('creator','false');
+                    sessionStorage.setItem('creator','false');
                 }
                 else{
-                    localStorage.setItem('creator','pending');
+                    sessionStorage.setItem('creator','pending');
                 }
                 alert(res.message);
                 window.location.reload();

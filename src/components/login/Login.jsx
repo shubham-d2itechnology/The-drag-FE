@@ -96,10 +96,10 @@ const Login = ({ setResponse }) => {
             console.log("login response", res);
             if (res.success) {
                 alert("You are Successfully Logged In");
-                localStorage.setItem('State', 'login');
+                sessionStorage.setItem('State', 'login');
                 console.log(res.iscreator);
-                setResponse(res.iscreator, localStorage.getItem('State'));
-                localStorage.setItem('creator', res.iscreator);
+                setResponse(res.iscreator, sessionStorage.getItem('State'));
+                sessionStorage.setItem('creator', res.iscreator);
                 window.location.reload();
             }
             else {
@@ -152,9 +152,9 @@ const Login = ({ setResponse }) => {
 
             }).then((res) => res.json()).then(res => {
                 if (res.success) {
-                    localStorage.setItem('State', 'login');
-                    setResponse(res.iscreator, localStorage.getItem('State'));
-                    localStorage.setItem('creator', res.iscreator);
+                    sessionStorage.setItem('State', 'login');
+                    setResponse(res.iscreator, sessionStorage.getItem('State'));
+                    sessionStorage.setItem('creator', res.iscreator);
                     alert("Sign Up Sucessfull!")
                     window.location.reload();
                 }

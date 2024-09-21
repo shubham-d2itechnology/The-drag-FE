@@ -15,8 +15,8 @@ dotnenv.config();
 
 
 const Navbar = () => {
-    const [State, setState] = useState(localStorage.getItem('State'));
-    const [creator, setcreator] = useState(localStorage.getItem('creator'));
+    const [State, setState] = useState(sessionStorage.getItem('State'));
+    const [creator, setcreator] = useState(sessionStorage.getItem('creator'));
     const [location, setlocation] = useState(new Map());
 
     console.log(State);
@@ -56,10 +56,10 @@ const Navbar = () => {
             }
         ).then((res) => res.json()).then((res) => {
             console.log(res.message);
-            localStorage.setItem('State', 'logout');
-            localStorage.removeItem('creator');
+            sessionStorage.setItem('State', 'logout');
+            sessionStorage.removeItem('creator');
             alert(res.message);
-            setState(localStorage.getItem('State'));
+            setState(sessionStorage.getItem('State'));
             window.location.reload();
         })
     }
