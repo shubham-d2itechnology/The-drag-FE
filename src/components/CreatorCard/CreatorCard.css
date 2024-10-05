@@ -239,7 +239,7 @@
 
  @media screen and  (max-width:800px){
     .creator-card-container{
-        width:80%;
+        width:90%;
         height: 235px;
         
         background-color: rgba(255, 238, 203, 1);
@@ -288,7 +288,7 @@
         gap:2%;
     }
     
-    .name{
+    .creator-name{
         margin-top: 15px;
         width:100%;
         gap:4px;
@@ -299,6 +299,7 @@
     line-height: 100%;
     color: rgba(28, 24, 38, 1);
     text-align: start;
+    overflow-wrap:anywhere;
         }
         &>p{
             font-size: 80%;
@@ -306,6 +307,7 @@
             font-weight: 400;
             line-height: 100%;
             color: rgba(51, 54, 63, 1);
+            
     
         }
     }
@@ -322,7 +324,7 @@
         gap:5px;
         &>p{
             font-family:'Jost';
-            font-size:70%;
+            font-size:60%;
             line-height: 100%;
             font-weight: 500;
             color: rgba(0, 0, 0, 1);

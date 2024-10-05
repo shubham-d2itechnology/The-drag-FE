@@ -1,0 +1,247 @@
+@media  screen and (min-width:1000px) {
+    .deal_card-container{
+        width:40%;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap:15px;
+        background-color: rgba(255, 238, 203, 1) ;
+        height:280px;
+        padding:15px 20px;
+        border-radius: 20px;
+    
+        &:hover{
+            transform:scale(1.05);
+            transition:transform 0.2s 100ms cubic-bezier(0.55, 0.085, 0.68, 0.53) ;
+    
+        }
+        
+    }
+    
+    table{
+        width:100%;
+       
+        >tbody{
+            width:100%;
+            height:50px;
+           color: rgba(64, 1, 1, 1);
+    
+        
+            >.head{
+                width:35%;
+                
+                
+                >h3{
+                    
+                    font-size:20px;
+                    line-height: 100%;
+                }
+            }
+            >td{
+                width:5%;
+            }
+            .desc{
+                width:60%;
+                max-width: 60%;
+                overflow-x: auto;
+               
+                
+                >a{
+                    
+                    text-decoration: none;
+                    color:inherit;
+                    >p{
+                        font-weight: 700;
+                        font-size: large;
+                         display:flex;
+                         align-items: center;
+                         gap:10px;
+                    }
+                   } 
+               
+               >p{
+                
+               
+                width:100%;
+                overflow-wrap:anywhere;
+                gap:10px;
+                max-height: 100px;
+                overflow-y: auto;
+                overflow-x: auto;
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
+    
+                
+               }
+               
+            }
+           
+            
+           
+              
+        }
+        
+    }
+    .apply-btn{
+        width:100px;
+      
+        cursor:pointer;
+        font-size: 20px;
+        font-weight: 700;
+        font-family:'Jost';
+        color:rgba(64, 1, 1, 1);
+        background-color: transparent;
+        padding:4px 4px;
+        outline:none;
+         border:2px solid rgba(64, 1, 1, 1);
+         border-radius:10px;
+    
+        &:hover{
+            border:none;
+            background-color: rgb(8, 252, 8);
+            color:rgba(255, 238, 203, 1) ;
+        }
+    
+    
+       }
+       .controls{
+        display:flex;
+        justify-content: flex-end;
+        
+        gap:20px;
+       
+       }
+    
+       #delete{
+        &:hover{
+            border:none;
+            background-color: rgb(247, 12, 12);
+        }
+       }
+    
+}
+
+@media screen and (max-width:400px){
+    .deal_card-container{
+        width:90vw;
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap:15px;
+        background-color: rgba(255, 238, 203, 1) ;
+        height:280px;
+        padding:15px 20px;
+        padding-right: 10px;
+        border-radius: 20px;
+        
+        &:hover{
+            transform:scale(1.05);
+            transition:transform 0.2s 100ms cubic-bezier(0.55, 0.085, 0.68, 0.53) ;
+    
+        }
+        
+    }
+    
+    table{
+        width:100%;
+      
+        >tbody{
+            width:100%;
+            
+           color: rgba(64, 1, 1, 1);
+           height:60px;
+    min-height: 50px;
+        
+            >.head{
+                width:35%;
+               
+                
+                >h3{
+                    
+                    font-size:18px;
+                    line-height: 100%;
+                }
+            }
+            >td{
+                width:5%;
+            }
+            .desc{
+                width:60%;
+                max-width: 60%;
+              
+               
+                
+                >a{
+                    
+                    text-decoration: none;
+                    color:inherit;
+                    >p{
+                        font-weight: 700;
+                        font-size: 15px;
+                         display:flex;
+                         align-items: center;
+                         gap:10px;
+                    }
+                   } 
+               
+               >p{
+                
+               
+                width:100%;
+                overflow-wrap:anywhere;
+                gap:10px;
+                max-height: 70px;
+                overflow-y: auto;
+                overflow-x: auto;
+        scrollbar-width: thin;
+        scroll-behavior: smooth;
+    
+                
+               }
+               
+            }
+           
+            
+           
+              
+        }
+        
+    }
+    .apply-btn{
+        width:max-content;
+      
+        cursor:pointer;
+        font-size: 15px;
+        font-weight: 700;
+        font-family:'Jost';
+        color:rgba(64, 1, 1, 1);
+        background-color: transparent;
+        padding:2px 4px;
+        outline:none;
+         border:2px solid rgba(64, 1, 1, 1);
+         border-radius:10px;
+    
+        &:hover{
+            border:none;
+            background-color: rgb(8, 252, 8);
+            color:rgba(255, 238, 203, 1) ;
+        }
+    
+    
+       }
+       .controls{
+        display:flex;
+        justify-content: flex-end;
+        
+        gap:10px;
+       
+       }
+    
+       #delete{
+        &:hover{
+            border:none;
+            background-color: rgb(247, 12, 12);
+        }
+       }
+    
+}

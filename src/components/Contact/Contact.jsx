@@ -4,7 +4,7 @@ import close_icon from '../../assets/close_icon.svg'
 import dotenv from 'dotenv'
 dotenv.config();
 
-const Contact = ({creatorEmail,name,close}) => {
+const Contact = ({email,name,close}) => {
  
     const handleContact=async (e)=>{
         document.getElementById('email-btn').setAttribute('disabled','true');
@@ -13,7 +13,7 @@ const Contact = ({creatorEmail,name,close}) => {
             subject:document.getElementById('subject').value,
             body:document.getElementById('body').value,
             attachment:document.getElementById('attachment').files[0],
-            creatormail:creatorEmail,
+            creatormail:email,
          }
          console.log(data);
          const formdata=new FormData();
@@ -40,7 +40,7 @@ const Contact = ({creatorEmail,name,close}) => {
     <div className='contact-container'>
         <div className="email">
                 <p>To:</p>
-                <p className='email-main'>{`${name} <${creatorEmail}>`}</p>
+                <p className='email-main'>{`${name} <${email}>`}</p>
                 
             </div>
         <form className='contact-form' action={`${process.env.REACT_APP_BASE_URL}v1/apis/contact`} method="post" encType='multipart/form-data' onSubmit={(e)=>{

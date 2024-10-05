@@ -10,6 +10,7 @@ import Register from "../Register/Register";
 import Login from "../login/Login";
 import Update from "../Update/Update";
 import dotnenv from 'dotenv'
+import DealCreate from "../DealCreate/DealCreate";
 dotnenv.config();
 
 
@@ -17,6 +18,7 @@ dotnenv.config();
 const Navbar = () => {
     const [State, setState] = useState(sessionStorage.getItem('State'));
     const [creator, setcreator] = useState(sessionStorage.getItem('creator'));
+    const [path,setPath]=useState(window.location.pathname);
     const [location, setlocation] = useState(new Map());
 
     console.log(State);
@@ -58,11 +60,34 @@ const Navbar = () => {
             console.log(res.message);
             sessionStorage.setItem('State', 'logout');
             sessionStorage.removeItem('creator');
+            sessionStorage.removeItem('email');
             alert(res.message);
             setState(sessionStorage.getItem('State'));
             window.location.reload();
         })
     }
+ 
+     useEffect(()=>{
+        if(path=='/creators'||path=='/'){
+        document.getElementsByClassName('second')[0].classList.remove('selected');
+        document.getElementsByClassName('first')[0].classList.remove('selected');
+        document.getElementsByClassName('first')[0].classList.add('selected');
+     }
+
+     if(path=='/deals'){
+        document.getElementsByClassName('second')[0].classList.remove('selected');
+        document.getElementsByClassName('first')[0].classList.remove('selected');
+        document.getElementsByClassName('second')[0].classList.add('selected');
+     }
+     console.log(window.location.pathname);
+    
+    
+    }
+     ,
+     [path])
+   
+
+
     return (
         <div className="nav-container">
             <div className="navbar">
@@ -70,34 +95,34 @@ const Navbar = () => {
                     <img src={logo} alt="" className="nav-logo" />
                     <p>Drag</p>
                 </Link>
-                
+            
                 <div className="nav-icons-list">
-                    {(State === 'login') ? (creator === 'true') ? <Popup  trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Update Creator Id</button>} closeOnDocumentClick={false} modal>
+                    {(State === 'login') ? (creator === 'true') ? <Popup  trigger={<button type="button" className='nav-btn' >Update Creator Id</button>} closeOnDocumentClick={false} modal>
                         {
                             close => (
                                 <Update close={close} />
 
                             )
                         }
-                    </Popup> :(creator==='false')? <Popup trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Register as Creator</button>} closeOnDocumentClick={false} modal nested>
+                    </Popup> :(creator==='false')? <Popup trigger={<button type="button" className='nav-btn' >Register as Creator</button>} closeOnDocumentClick={false} modal nested>
                         {
                             close => (
                                 <Register close={close} location={location} />
                             )
                         }
                     </Popup> : 
-                    <button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Waiting for Approval</button>
+                    <button type="button" className='nav-btn' >Waiting for Approval</button>
                     :<></>}
                     {
                         (State !== 'login') ?
-                            <Popup className="login-popup" trigger={<button type="button" style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Sign Up/ Login</button>} modal>
+                            <Popup className="login-popup" trigger={<button type="button" className='nav-btn' >Sign Up/ Login</button>} modal>
                                 {
                                     close => (
                                         <Login setResponse={fetchdata} />
                                     )
                                 }
                             </Popup>
-                            : <button type="button" onClick={logout} style={{ cursor: 'pointer', fontFamily: 'Jost', borderRadius: '10px', backgroundColor: 'white', color: '#1c1826', fontWeight: '700', outline: 'none', border: 'none', }}>Log Out</button>
+                            : <button type="button" className='nav-btn' onClick={logout} >Log Out</button>
                     }
                     {/* <div className="nav-icon">
            <Link to='#'> <img src={search_icon} alt=""  /></Link> 
@@ -109,6 +134,27 @@ const Navbar = () => {
             <Link to='#'><img src={cart_icon} alt=""  /></Link>
          </div> */}
                 </div>
+            </div>
+            <div className="creator-deals">
+            <table>
+        <thead>
+         
+          <td className="first "
+                onClick={(e)=>setPath('/creators')}  >
+             <Link to='/creators' id="f"><h3>Creators</h3></Link>
+          </td>
+          
+          
+          <td 
+          className="second"
+          onClick={(e)=>setPath('/deals')}
+          >
+            <Link to='/deals' id="s"><h3>Deals</h3> </Link>
+            </td>
+         
+          
+        </thead>
+        </table>
             </div>
         </div>
     )

@@ -1,0 +1,78 @@
+*{
+box-sizing: border-box;
+
+}
+
+.deals-container{
+    width:100%;
+    min-height:60.5vh;
+display:flex;
+flex-direction: column;
+align-items: center;
+margin-bottom: 50px;
+}
+
+.deals-main{
+    width:90%;
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+   column-gap:40px;
+   row-gap: 20px;
+
+}
+
+.post-btn{
+    outline:none;
+    height:40px;
+    width:150px;
+    font-size: 25px;
+    font-family: 'Jost';
+    font-weight: 700;
+    background-color:rgba(255, 238, 203, 1) ;
+    cursor:pointer;
+    border:none;
+    border-radius:50px;
+    position:relative;
+    box-shadow:10px 10px 5px solid rgba(255, 238, 203, 1) ;
+    >p{
+        position:absolute;
+        top:5px;
+        left:10px;
+        z-index: 20;
+    }
+   
+    
+
+    
+}
+
+.post-btn::after{
+    content:'';
+    width:0;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    z-index:1;
+    background-color:rgba(64, 1, 1, 1); 
+    border-radius: 50px;
+}
+
+.post-btn:hover p{
+   
+
+        color: rgba(255, 238, 203, 1) ;
+         transition:all 500ms 0s linear;
+       
+    
+}
+.post-btn:hover::after{
+   
+
+   width:100%;
+     transition:all 400ms 0s ease;
+   
+
+}

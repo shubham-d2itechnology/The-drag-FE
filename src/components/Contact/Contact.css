@@ -28,7 +28,7 @@
              padding: 5px 10px;
              border:1px solid gray;
              border-radius:10px;
-             width:80%;
+             width:100%;
         }
     }
     .contact-form{
@@ -48,7 +48,7 @@
              border:1px solid gray;
              border-radius:10px;
              height:40px;
-             width:80%;
+             width:100%;
              font-size: 16px;
         }
     }
@@ -64,7 +64,7 @@
        min-width: 100%;
        max-width: 100%;
         min-height: 200px;
-        max-height: 260px;
+        max-height: 200px;
         font-family: 'Jost';
         padding-left:5px;
        }
@@ -134,7 +134,7 @@
 @media screen and (max-width:700px){
     .contact-container{
         width:90vw;
-        height:80vh;
+        height:85vh;
         background-color:  rgb(252, 245, 235);
         padding:10px 20px;
         display:flex;
@@ -149,6 +149,7 @@
     }
     
     .email{
+
         display:flex;
         flex-direction: column;
         gap:1vh;
@@ -161,7 +162,7 @@
              padding: 0.5vh 5px;
              border:1px solid gray;
              border-radius:10px;
-             width:90%;
+             width:100%;
              
              font-size:2vh;
             
@@ -184,7 +185,7 @@
              border:1px solid gray;
              border-radius:10px;
              height:4vh;
-             width:90%;
+             width:100%;
              font-size: 2vh;
         }
     }
@@ -199,8 +200,9 @@
        >textarea{
        min-width: 100%;
        max-width: 100%;
-        min-height: 10vh;
-        max-height: 260px;
+       height:150px;
+        min-height: 150px;
+        max-height: 150px;
         font-family: 'Jost';
         padding-left:5px;
        }
@@ -254,7 +256,7 @@
         font-family: 'Jost';
         font-weight: 700;
         width:100px;
-        bottom:5vh;
+        bottom:1vh;
         right:10px;
         padding:5px 4px;
         outline:none;

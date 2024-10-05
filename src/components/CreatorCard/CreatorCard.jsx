@@ -84,7 +84,7 @@ const CreatorCard = ({props}) => {
          {(sessionStorage.getItem('State')=='logout')?<button type="button" className='contact-btn' onClick={()=>alert("Please Login First!")}>Contact</button>:
          <Popup  trigger={<button type="button" className='contact-btn'>Contact</button>} modal  position={['top left', 'top right', 'bottom right' ,'bottom left' ,'right center', 'left center', 'top center' ,'bottom center' ,'center center']}>
           {close=>{
-            return <Contact creatorEmail={email} name={name} close={close}/>
+            return <Contact email={email} name={name} close={close}/>
           }
           }
          </Popup>

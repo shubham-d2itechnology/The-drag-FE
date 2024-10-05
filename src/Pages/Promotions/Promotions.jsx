@@ -6,6 +6,7 @@ import CreatorCard from '../../components/CreatorCard/CreatorCard'
 import Popup from 'reactjs-popup'
 import Filter from '../../components/Filter/Filter'
 import DragContext from '../../Context/Dragcontext'
+import { Link } from 'react-router-dom'
 import dotenv from 'dotenv'
 dotenv.config();
 
@@ -46,6 +47,8 @@ const Promotions = () => {
 
   return (
     <div className='promotions-container'>
+      
+    
       <div className="search-filter">
         <div className="search">
           <form  onSubmit={(e)=>e.preventDefault()}>

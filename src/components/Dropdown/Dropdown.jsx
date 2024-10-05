@@ -1,14 +1,21 @@
 import React, { useState } from 'react'
 import './Dropdown.css'
 import { Link } from 'react-router-dom';
-const Dropdown = ({locations,input}) => {
-  console.log(locations);
+const Dropdown = ({entries,input=null,category,setinput=null,Input=null,func=null}) => {
+  console.log(entries);
+  
+
+
+
   
   return (
-    <div className='dropdown'  >
+
+    <div className='dropdown' onMouseEnter={(e)=>func(true)} onMouseLeave={(e)=>func(false)} >
+      {
+   (category==="location")?
       <ul>
         {
-         locations.map((ele, i) => {
+         entries.map((ele, i) => {
 
 
             return (
@@ -29,6 +36,27 @@ const Dropdown = ({locations,input}) => {
           })
         }
       </ul>
+      :
+      <ul>
+        {
+          entries.map((item,idx)=>{
+              return (<li key={idx} onClick={(e)=>{
+               
+                document.getElementById(idx).checked=!document.getElementById(idx).checked;
+                if(document.getElementById(idx).checked){
+                  setinput(item,true);
+                  }
+                  else{
+                    setinput(item,false);
+                  }
+                
+                
+              }}><input type="radio" name={item} id={idx} checked={(Input.includes(item))?true:false}    />{" "+item}</li>
+            )
+          })
+        }
+      </ul>
+}
     </div>
   )
 }

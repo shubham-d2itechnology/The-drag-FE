@@ -4,10 +4,50 @@
     width:100%;
     display:flex;
     flex-direction: column;
-    margin:37px auto;
+    margin:0 auto;
     margin-bottom: 100px;
    min-height:310px;
    
+}
+.promotions-container>table{
+    width:100%;
+    margin-bottom: 40px;
+    height:70px;
+    >thead{
+        width:100%;
+        gap:40px;
+        
+        >td{
+            width:50%;
+            background-color: rgba(255, 238, 203, 1) ;
+            >h3{
+                font-size:30px;
+                color:rgba(64, 1, 1, 1);
+            }
+        }
+        >#first{
+            cursor: pointer;
+            text-align: right;
+            border-right: 40px solid transparent;
+            &:hover{
+                background-color:rgba(64, 1, 1, 1) ;
+                >h3{
+                color:rgba(255, 238, 203, 1) ;
+                }
+            }
+        }
+        >#second{
+           cursor: pointer;
+            padding-left: 40px;
+            &:hover{
+                
+                background-color:rgba(64, 1, 1, 1) ;
+                >h3{
+                color:rgba(255, 238, 203, 1) ;
+                }
+            }
+        }
+    }
 }
 .promotions-container>.search-filter{
     display:flex;

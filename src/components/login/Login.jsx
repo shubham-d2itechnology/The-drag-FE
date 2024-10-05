@@ -100,6 +100,7 @@ const Login = ({ setResponse }) => {
                 console.log(res.iscreator);
                 setResponse(res.iscreator, sessionStorage.getItem('State'));
                 sessionStorage.setItem('creator', res.iscreator);
+                sessionStorage.setItem('email',res.email);
                 window.location.reload();
             }
             else {
@@ -155,6 +156,7 @@ const Login = ({ setResponse }) => {
                     sessionStorage.setItem('State', 'login');
                     setResponse(res.iscreator, sessionStorage.getItem('State'));
                     sessionStorage.setItem('creator', res.iscreator);
+                    sessionStorage.setItem('email',res.email);
                     alert("Sign Up Sucessfull!")
                     window.location.reload();
                 }

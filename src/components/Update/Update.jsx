@@ -217,7 +217,7 @@ else{
                     }} />
 
                    {
-                  (visible&&locations.length>0)?<Dropdown locations={locations} input={input}/>:''
+                  (visible&&locations.length>0)?<Dropdown entries={locations} input={input} category="location"/>:''
 }
                 </div>
                 <div className="contacts">
