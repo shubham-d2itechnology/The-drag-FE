@@ -30,7 +30,7 @@ const Contact = ({email,name,close}) => {
                 window.location.reload();
             }
             else {
-                alert(res.error);
+                alert(res.error||res.message);
                 window.location.reload();
             }
            })
