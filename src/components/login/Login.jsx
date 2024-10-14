@@ -7,13 +7,14 @@ dotenv.config();
 
 
 const Login = ({ setResponse }) => {
-
+    
+    const [name,setname]=useState("");
     const [state, setstate] = useState('signup');
     const [visible, setvisible] = useState(false);
     const [password, setPassword] = useState('');
     const [isValid, setIsValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
-    const [clicked,setclicked]=useState(false);
+    const [clicked, setclicked] = useState(false);
     const [email, setEmail] = useState('');
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [errorMessageEmail, setErrorMessageEmail] = useState('');
@@ -22,19 +23,19 @@ const Login = ({ setResponse }) => {
         // Basic email regex pattern
         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         return emailPattern.test(email);
-      };
-      const handleEmail = (e) => {
+    };
+    const handleEmail = (e) => {
         const inputEmail = e.target.value;
         setEmail(inputEmail);
-    
+
         if (validateEmail(inputEmail)) {
-          setIsValidEmail(true);
-          setErrorMessageEmail('');
+            setIsValidEmail(true);
+            setErrorMessageEmail('');
         } else {
-          setIsValidEmail(false);
-          setErrorMessageEmail('Please enter a valid email address');
+            setIsValidEmail(false);
+            setErrorMessageEmail('Please enter a valid email address');
         }
-      };
+    };
 
     const validatePassword = (password) => {
         const minLength = 8;
@@ -100,7 +101,7 @@ const Login = ({ setResponse }) => {
                 console.log(res.iscreator);
                 setResponse(res.iscreator, sessionStorage.getItem('State'));
                 sessionStorage.setItem('creator', res.iscreator);
-                sessionStorage.setItem('email',res.email);
+                sessionStorage.setItem('email', res.email);
                 window.location.reload();
             }
             else {
@@ -121,7 +122,7 @@ const Login = ({ setResponse }) => {
         setIsValid(!error);
     };
     const handlePassword = (e) => {
-        if (e.target.value.length == 0&&(!clicked)) {
+        if (e.target.value.length == 0 && (!clicked)) {
             alert(`Password Should include:
         * Password must be at least 8 characters long.
         * Password must contain at least one special character.
@@ -135,11 +136,11 @@ const Login = ({ setResponse }) => {
 
     const handlesignup = async (e) => {
         e.preventDefault();
-        if (isValid&&isValidEmail) {
+        if (isValid && isValidEmail) {
             const formdata = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                password: document.getElementById('password').value,
+               name,
+               email,
+               password
             }
 
             await fetch(`${process.env.REACT_APP_BASE_URL}v1/apis/signup`, {
@@ -156,7 +157,7 @@ const Login = ({ setResponse }) => {
                     sessionStorage.setItem('State', 'login');
                     setResponse(res.iscreator, sessionStorage.getItem('State'));
                     sessionStorage.setItem('creator', res.iscreator);
-                    sessionStorage.setItem('email',res.email);
+                    sessionStorage.setItem('email', res.email);
                     alert("Sign Up Sucessfull!")
                     window.location.reload();
                 }
@@ -166,15 +167,15 @@ const Login = ({ setResponse }) => {
             })
 
         }
-        else if(isValidEmail) {
-           
+        else if (isValidEmail) {
+
             alert(`Password is Invalid`);
 
         }
-        else if(isValid ){
+        else if (isValid) {
             alert('Email is Invalid');
         }
-        else{
+        else {
             alert(`Password and Email are Invalid`);
         }
     }
@@ -193,26 +194,26 @@ const Login = ({ setResponse }) => {
                         {state == 'signup' ? <p className='login'>Already have an account?<span style={{ cursor: 'pointer' }} onClick={() => setstate('login')}><strong>Log In</strong></span></p> : <p className='login'>Don't have an account?<span style={{ cursor: 'pointer' }} onClick={() => setstate('signup')}><strong>Sign Up</strong></span></p>}
                     </div>
                     {state == 'signup' ?
-                        <form  onSubmit={(e)=>handlesignup(e)}>
+                        <form onSubmit={(e) => handlesignup(e)}>
                             <div>
                                 <label htmlFor="name">Name</label>
-                                <input type="text" name="name" id="name" />
+                                <input type="text" name="name" id="name" value={name} onChange={(e)=>setname(e.target.value)} />
                             </div>
                             <div>
                                 <label htmlFor="email">E-mail</label>
-                                <input type="email" name="email" id="email" onInput={(e)=>{handleEmail(e)}} />
-                                <div style={{fontSize:'12px', color: isValidEmail ? 'green' : 'red' }}>
-                                   {isValidEmail ? 'Email is valid' : errorMessageEmail}
-                                 </div>
+                                <input type="email" name="email" id="email" value={email} onInput={(e) => { handleEmail(e) }} />
+                                <div style={{ fontSize: '12px', color: isValidEmail ? 'green' : 'red' }}>
+                                    {isValidEmail ? 'Email is valid' : errorMessageEmail}
+                                </div>
                             </div>
                             <div className='password'>
                                 <label htmlFor="password">Password</label>
                                 <div>
-                                    <input type="password" name="password" id="password" onClick={(e) => handlePassword(e)} onChange={handleChange} />
+                                    <input type="password" name="password" id="password" value={password} onClick={(e) => handlePassword(e)} onChange={handleChange} />
 
                                     <img onClick={() => { setvisible(!visible); }} src={eye} alt="" />
                                 </div>
-                                <div style={{fontSize:'12px', color: isValid ? 'green' : 'red' }}>
+                                <div style={{ fontSize: '12px', color: isValid ? 'green' : 'red' }}>
                                     {isValid ? 'Password is valid' : errorMessage}
                                 </div>
 
@@ -224,11 +225,11 @@ const Login = ({ setResponse }) => {
 
                             <div>
                                 <label htmlFor="email">E-mail</label>
-                                <input type="email" name="email" id="email" />
+                                <input type="email" name="email" id="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                             </div>
                             <div className='password'>
                                 <label htmlFor="password">Password</label>
-                                <input type="password" name="password" id="password" />
+                                <input type="password" name="password" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
                                 <img onClick={() => { setvisible((!visible)); }} src={eye} alt="show" />
                             </div>
                             <button type="submit" >Log In</button>
